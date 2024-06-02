@@ -56,16 +56,9 @@ class ModelService:
 
         logger.info(f"making prediction!")
 
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        image = image.to(device)
-
-        self.model.eval()  # Переведення моделі в режим оцінки
-
         # Перевірка доступності CUDA
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(device)
-
-        image = image.to(device)
 
         logger.add("predict_{time}.log", rotation="500 MB")  # Налаштування логування у файл
 

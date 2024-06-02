@@ -157,3 +157,6 @@ cython_debug/
 artifacts
 models
 data
+app.2024-05-27_13-03-00_742446.log.zip
+.DS_Store
+.gitignore

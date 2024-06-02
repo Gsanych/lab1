@@ -13,7 +13,22 @@ def load_data(batch_size=128):
         transforms.Normalize((0.5071, 0.4865, 0.4409), (0.2673, 0.2564, 0.2762))
     ])
 
-    full_dataset = torchvision.datasets.CIFAR100(root=settings.data_path, train=True, download=True, transform=transform)
+    # Data augmentation та нормалізація для тренувального набору даних
+    transform_train = transforms.Compose([
+        transforms.RandomCrop(32, padding=4),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+])
+
+# Нормалізація для тестового набору даних
+    transform_test = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+    ])
+
+    # full_dataset = torchvision.datasets.CIFAR100(root=settings.data_path, train=True, download=True, transform=transform)
+    full_dataset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
 
 
     train_size = int(settings.train_ratio * len(full_dataset))
